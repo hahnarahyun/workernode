@@ -1,0 +1,14 @@
+version: '2'
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: python:3.8-alpine 
+    command: bash -c "apk add --no-cache build-base libcurl curl-dev; celery -A tasks worker --loglevel=info"
+    environment:
+      - AWS_REGION
+      - SQS_URL
+      - C_FORCE_ROOT=true
+    volumes:
+      - ./:/app/
