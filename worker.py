@@ -1,5 +1,6 @@
 import boto3
 def fibonacci(n):
+    print("loop: ", n)
     if n <= 0:
         print("incorect input")
     elif n == 1:
