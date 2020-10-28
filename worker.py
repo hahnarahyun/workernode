@@ -9,19 +9,21 @@ def fibonacci(n):
     else:
         return fibonacci(n-1)+fibonacci(n-2)
 
-sqs = boto3.resource('sqs', region_name='us-west-2')
+sqs = boto3.resource('sqs', region_name='us-west-1')
 
 # Get the queue
-queue = sqs.get_queue_by_name(QueueName='celery')
+queue = sqs.get_queue_by_name(QueueName='Sustainability-GD-Queue')
 
-while True:
-    for message in queue.receive_messages(MessageAttributeNames=['Fibonacci']):
-        print('Hello')
-        number_text='0'
-        if message.message_attributes is not None:
-            number = (message.message_attributes.get('Fibonacci').get('StringValue'))
-            if number:
-                number_text = '{0}'.format(number)
-            number = int(number)
-        print(fibonacci(number))
-        print('{0}{1}'.format(message.body, number_text))
+if __name__ == "__main__":
+    while True:
+        for message in queue.receive_messages(MessageAttributeNames=['Fibonacci']):
+            print('Hello')
+            number_text='0'
+            if message.message_attributes is not None:
+                number = (message.message_attributes.get('Fibonacci').get('StringValue'))
+                if number:
+                    number_text = '{0}'.format(number)
+                number = int(number)
+            print(fibonacci(number))
+            print('{0}{1}'.format(message.body, number_text))
+            message.delete()
