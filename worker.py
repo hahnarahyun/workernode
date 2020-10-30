@@ -1,4 +1,5 @@
 import boto3
+import time
 def fibonacci(n):
     print("loop: ", n)
     if n <= 0:
@@ -13,7 +14,7 @@ def fibonacci(n):
 sqs = boto3.resource('sqs', region_name='us-west-1')
 
 # Get the queue
-queue = sqs.get_queue_by_name(QueueName='Sustainability-GD-Queue')
+queue = sqs.get_queue_by_name(QueueName='Worker-Queue')
 
 if __name__ == "__main__":
     while True:
@@ -28,3 +29,4 @@ if __name__ == "__main__":
             print(fibonacci(number))
             print('{0}{1}'.format(message.body, number_text))
             message.delete()
+        time.sleep(5)
