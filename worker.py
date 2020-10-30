@@ -18,7 +18,7 @@ queue = sqs.get_queue_by_name(QueueName='Worker-Queue')
 
 if __name__ == "__main__":
     while True:
-        for message in queue.receive_messages(MessageAttributeNames=['Fibonacci']):
+        for message in queue.receive_messages(MessageAttributeNames=['Fibonacci'], MaxNumberOfMessage=1):
             print('Hello')
             number_text='0'
             if message.message_attributes is not None:
