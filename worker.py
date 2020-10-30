@@ -14,7 +14,7 @@ def fibonacci(n):
 sqs = boto3.resource('sqs', region_name='us-west-1')
 
 # Get the queue
-queue = sqs.get_queue_by_name(QueueName='Worker-Queue')
+queue = sqs.get_queue_by_name(QueueName='Sustainability-GD-Queue')
 
 if __name__ == "__main__":
     while True:
