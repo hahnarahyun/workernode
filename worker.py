@@ -13,14 +13,14 @@ def fibonacci(n):
 sqs = boto3.resource('sqs', region_name='us-west-1')
 
 # Get the queue
-queue = sqs.get_queue_by_name(QueueName='Sustainability-GD-Queue')
+queue = sqs.get_queue_by_name(QueueName='Worker-Queue')
 
 if __name__ == "__main__":
     count = 0
     while True:
         count = 1 + count
         print("while loop: ", count)
-        for message in queue.receive_messages(MessageAttributeNames=['Fibonacci'], MaxNumberOfMessage=1):
+        for message in queue.receive_messages(MessageAttributeNames=['All'], MaxNumberOfMessages=1):
             print("processing message on sqs")
             number_text='0'
             if message.message_attributes is not None:
