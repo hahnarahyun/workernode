@@ -30,6 +30,6 @@ if __name__ == "__main__":
                 number = int(number)
             print(fibonacci(number))
             print('{0}{1}'.format(message.body, number_text))
-            print('deleting message')
+            print('deleting message', count)
             message.delete()
         time.sleep(5)
